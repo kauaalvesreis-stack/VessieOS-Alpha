@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VessieLang OS</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme-dark.css" id="themeStyle" />
+    <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div id="loginBox">
+            <h1>⧩ VessieLang</h1>
+            <div class="sub">Sistema Operacional Web</div>
+            <input id="loginUser" type="text" placeholder="Usuário" value="admin" />
+            <input id="loginPass" type="password" placeholder="Senha" value="admin" />
+            <button class="login-btn" id="loginBtn">Entrar</button>
+            <div id="loginError"></div>
+        </div>
+    </div>
+
+    <!-- Desktop -->
+    <div id="desktop">
+        <div id="desktopIcons"></div>
+        <div id="taskbar">
+            <button id="startBtn" title="Menu Iniciar">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </button>
+            <div id="taskbarApps"></div>
+            <div id="taskbarRight">
+                <span id="taskbarClock">--:--</span>
+            </div>
+        </div>
+        <div id="startMenu">
+            <input id="startMenuSearch" type="text" placeholder="Pesquisar aplicativos..." />
+            <div id="startMenuContent">
+                <div id="startMenuLeft"></div>
+                <div id="startMenuRight">
+                    <div class="start-menu-divider"></div>
+                    <div class="start-power-btn" data-action="shutdown"><span class="icon">⏻</span> Desligar</div>
+                    <div class="start-power-btn" data-action="reboot"><span class="icon">⟳</span> Reiniciar</div>
+                    <div class="start-power-btn" data-action="logout"><span class="icon">⇤</span> Sair</div>
+                </div>
+            </div>
+        </div>
+        <div id="notifications"></div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "kernel/": "./js/kernel/",
+                "interpreter/": "./js/interpreter/",
+                "modules/": "./js/modules/",
+                "fs/": "./js/fs/",
+                "security/": "./js/security/",
+                "ui/": "./js/ui/",
+                "apps/": "./js/apps/",
+                "gamehub/": "./js/gamehub/",
+                "network/": "./js/network/",
+                "utils/": "./js/utils/"
+            }
+        }
+    </script>
+    <script type="module" src="js/kernel/boot.js"></script>
+</body>
+</html>

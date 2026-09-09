@@ -1,0 +1,42 @@
+import "gui" as ui;
+import "system" as sys;
+
+func main() {
+    var win = ui.createWindow("Calculadora", 280, 340);
+    var display = ui.textBox("", "0");
+    display.querySelector('input').style.textAlign = 'right';
+    display.querySelector('input').style.fontSize = '20px';
+    var grid = document.createElement('div');
+    grid.style.cssText = 'display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px;';
+
+    var expressao = "";
+    func atualizarDisplay() {
+        display.querySelector('input').value = expressao || "0";
+    }
+
+    func pressionar(valor) {
+        if (valor == "C") expressao = "";
+        else if (valor == "=") {
+            try { expressao = String(Function('"use strict"; return (' + expressao + ')')()); }
+            catch(e) { expressao = "Erro"; }
+        } else if (valor == "⌫") expressao = expressao.slice(0, -1);
+        else expressao += valor;
+        atualizarDisplay();
+    }
+
+    var teclas = ["7","8","9","/","4","5","6","*","1","2","3","-","0",".","=","+","C","⌫"];
+    for (var i = 0; i < teclas.length; i++) {
+        var btn = document.createElement('button');
+        btn.textContent = teclas[i];
+        btn.className = 'gui-button';
+        btn.style.cssText = 'padding:12px;font-size:18px;border:none;border-radius:6px;cursor:pointer;' +
+            'background:rgba(255,255,255,0.06);color:#ddd;transition:transform 0.08s;';
+        btn.onclick = (function(v) { return function() { pressionar(v); }; })(teclas[i]);
+        grid.appendChild(btn);
+    }
+
+    win.add(display);
+    win.add(grid);
+    win.show();
+}
+main();
