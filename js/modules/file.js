@@ -1,5 +1,6 @@
 // Módulo file - sistema de arquivos para .vl
 import * as fs from '../fs/filesystem.js';
+import * as ops from '../fs/ops.js';
 
 export default function fileModule(kernel) {
     const guard = (path) => {
@@ -18,18 +19,18 @@ export default function fileModule(kernel) {
             return fs.writeFile(path, cur + content);
         },
         delete: (path) => fs.deleteFile(guard(path)),
-        move: (src, dest) => fs.moveFile(guard(src), guard(dest)),
-        copy: (src, dest) => fs.copyFile(guard(src), guard(dest)),
-        exists: (path) => fs.exists(guard(path)),
-        size: (path) => fs.fileSize(guard(path)),
+        move: (src, dest) => ops.moveFile(guard(src), guard(dest)),
+        copy: (src, dest) => ops.copyFile(guard(src), guard(dest)),
+        exists: (path) => ops.exists(guard(path)),
+        size: (path) => ops.fileSize(guard(path)),
         list: (dir = '/') => fs.listDirectory(dir) || [],
         mkdir: (path) => fs.mkdir(guard(path)),
-        rmdir: (path) => fs.removeDir(guard(path)),
-        chmod: (path, mode) => fs.chmod(guard(path), mode),
-        stat: (path) => fs.stat(guard(path)),
+        rmdir: (path) => ops.removeDir(guard(path)),
+        chmod: (path, mode) => ops.chmod(guard(path), mode),
+        stat: (path) => ops.stat(guard(path)),
         trash: (path) => fs.deleteFile(guard(path)),
-        emptyTrash: () => fs.emptyTrash(),
-        compress: (path) => fs.compressFile(guard(path)),
-        decompress: (path) => fs.decompressFile(guard(path))
+        emptyTrash: () => ops.emptyTrash(),
+        compress: (path) => ops.compressFile(guard(path)),
+        decompress: (path) => ops.decompressFile(guard(path))
     };
 }

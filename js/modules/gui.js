@@ -97,6 +97,15 @@ export default function guiModule(kernel) {
                 }
             } };
         },
+        panel() {
+            const p = el('div', 'gui-panel');
+            p.style.cssText = 'width:100%;';
+            return {
+                el: p,
+                add(c) { p.appendChild(c.el || c); return this; },
+                setStyle(css) { p.style.cssText = css; return this; }
+            };
+        },
         label(text) {
             const l = el('div', 'gui-label', text);
             return { el: l, setText(t) { l.textContent = t; } };

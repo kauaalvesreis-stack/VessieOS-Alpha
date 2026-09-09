@@ -123,8 +123,17 @@ class Parser {
         this.next();
         this.expectPunct('(');
         if (this.isKw('var')) {
+            const varPos = this.pos;
             const init = this.parseVar();
-            this.expectPunct(';');
+            // for (var x in lista) — for-in com declaração
+            if (this.isKw('in')) {
+                this.next();
+                const iterable = this.parseExpression();
+                this.expectPunct(')');
+                const body = this.parseBlock();
+                return { type: 'ForIn', name: init.name, iterable, body };
+            }
+            this.optSemi();
             const cond = this.parseExpression();
             this.expectPunct(';');
             const step = this.parseStatement();
