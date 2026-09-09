@@ -9,6 +9,8 @@ export { Interpreter, run, VL_BREAK, VL_CONTINUE, VLFunction } from './src/inter
 export { VLBuiltins, installBuiltins } from './src/builtins.js';
 export { StdLib, installStdlib } from './src/stdlib.js';
 export { transpile } from './src/transpiler.js';
+export { transpile } from './src/IframeAPI.js';
+export { transpile } from './src/iframe-advanced.js';
 export { PRIMITIVES, TYPE_MAP, typeofV, checkType, coerce, typeInfo } from './src/types.js';
 
 export { tokenize };
