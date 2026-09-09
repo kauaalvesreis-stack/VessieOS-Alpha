@@ -1,5 +1,4 @@
 import { readFile } from '../fs/filesystem.js';
-import { createProcess } from '../kernel/kernel.js';
 
 export function launchApp(name) {
     const scriptPath = `/apps/${name}.vl`;
